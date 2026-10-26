@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva - Habitacion Matrimonial | Hotel Perla del Lago</title>
+    <link rel="stylesheet" href="estiloos/styles.css">
+</head>
+<body>
+
+    <div class="lava-lampara-bg">
+        <div class="blup blup-1"></div>
+        <div class="blup blup-2"></div>
+        <div class="blup blup-3"></div>
+    </div>
+
+    <!-- botonsitoo volver -->
+    <div class="back-nav">
+        <a href="index.html" class="btn-back">&larr; Volver a Habitaciones</a>
+    </div>
+
+    <!-- contenedor de la tarjeta ci-->
+    <main class="room-detail-container">
+        
+        <article class="room-detail-card">
+            
+            <!-- seccion de detalles -->
+            <div class="room-detail-info">
+                <div class="detail-image-box">
+                    <img src="imagen1.jpeg" alt="Habitacion matrimonial"> /* Cambia foto */
+                </div>
+                <h2>Habitacion matrimonial</h2>
+                <div class="stars">⭐⭐⭐⭐</div>
+                <p class="price-tag">Precio: <strong>450 BOB / noche</strong></p>
+                <p class="description">
+                    Disfruta de una estancia inolvidable con vista panorámica al lago. La Habitacion matrimonial cuenta con dos camas King Size, baño privado con agua caliente, TV por cable, Wi-Fi de alta velocidad y servicio a la habitación las 24 horas.
+                </p>
+            </div>
+
+            <!-- FORMULARIOoo-->
+            <div class="room-booking-form">
+                <h3>Reserva tu Habitación</h3>
+                <p>Completa tus datos para confirmar tu reserva:</p>
+
+                <form id="bookingForm" onsubmit="guardarReserva(event)">
+                    <div class="form-group">
+                        <label for="nombre">Nombre completo:</label>
+                        <input type="text" id="nombre" placeholder="Ej. Aaron Blanco si" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Correo electrónico:</label>
+                        <input type="email" id="email" placeholder="correo@ejemplo.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono">Teléfono / WhatsApp:</label>
+                        <input type="tel" id="telefono" placeholder="+591 70000000" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="checkin">Fecha de entrada:</label>
+                            <input type="date" id="checkin" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="checkout">Fecha de salida:</label>
+                            <input type="date" id="checkout" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="huespedes">Número de personas:</label>
+                        <select id="huespedes">
+                            <option value="1">1 Persona</option>
+                            <option value="2">2 Personas</option>
+                            <option value="3">3 Personas</option>
+                            <option value="4" selected>4 Personas (Familia)</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-confirm-booking">Confirmar Reserva</button>
+                </form>
+
+                <!-- Mensaje de confirmación al guardar -->
+                <div id="confirmationMessage" class="confirmation-message"></div>
+            </div>
+
+        </article>
+
+    </main>
+
+    <!-- java para reservar si-->
+    <script>
+    function guardarReserva(event) {
+        event.preventDefault(); 
+
+        // valores de las variables ci
+        const nombre = document.getElementById('nombre').value;
+        const email = document.getElementById('email').value;
+        const telefono = document.getElementById('telefono').value;
+        const checkin = document.getElementById('checkin').value;
+        const checkout = document.getElementById('checkout').value;
+        const huespedes = document.getElementById('huespedes').value;
+
+        // numero del dueño
+        const numeroDuenio = "59164096450"; 
+
+        // creacion del mensaje pa wasap
+        const mensaje = `¡Hola! Me gustaría hacer una reserva en el *Hotel Perla del Lago*:%0A%0A` +
+                        ` *Habitación:* Matrimonial%0A` +
+                        ` *Nombre:* ${nombre}%0A` +
+                        ` *Correo:* ${email}%0A` +
+                        ` *Teléfono:* ${telefono}%0A` +
+                        ` *Fecha de entrada:* ${checkin}%0A` +
+                        ` *Fecha de salida:* ${checkout}%0A` +
+                        ` *Huéspedes:* ${huespedes}%0A%0A` +
+                        `Quedo a la espera de la confirmación. ¡Gracias!`;
+
+        // enlace pal wasap
+        const urlWhatsApp = `https://wa.me/${numeroDuenio}?text=${mensaje}`;
+
+        //Abrir wasap en una nueva pestaña
+        window.open(urlWhatsApp, '_blank');
+
+        //mensaje visual
+        const msgBox = document.getElementById('confirmationMessage');
+        msgBox.innerHTML = `¡Gracias, <strong>${nombre}</strong>! Se abrirá WhatsApp para enviar tu solicitud de reserva al hotel.`;
+        msgBox.style.display = 'block';
+
+        document.getElementById('bookingForm').reset();
+    }
+</script>
+
+
+</body>
+</html>
